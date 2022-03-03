@@ -394,10 +394,6 @@ class StockMoveLineInherit(models.Model):
 
         return super(StockMoveLineInherit, self).write(vals)
 
-class StockMoveLineInherit(models.Model):
-    _inherit = "account.invoice"
-    
-    typeReglement = fields.Selection(string='Type Reglement', selection=[('Banque', 'Banque'), ('espece', 'espece'),])
     
 
 

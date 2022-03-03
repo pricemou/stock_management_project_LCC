@@ -705,18 +705,6 @@
 
         <!-- account invoice -->
 
-        <record id="add_filed_account" model="ir.ui.view">
-            <field name="name">account.form</field>
-            <field name="model">account.invoice</field>
-            <field name="type">form</field>
-            <field name="inherit_id" ref="account.invoice_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='payment_term_id']" position="after">
-                    <field name="typeReglement"/>
-                </xpath>
-            </field>
-        </record>
-
     </data>
 
 </odoo>
