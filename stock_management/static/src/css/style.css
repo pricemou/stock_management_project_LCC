@@ -1,19 +1,36 @@
 :root {
-    --orange: #ef7c29;
-    --orangeClair: #ef7c297a;
-    --verte: #41995e;
-    --verteFond: #398a54;
+    --orange: #f90505;
+    --orangeClair: #f90505;
+    --verte: #ae0001;
+    --verteFond: #f90505;
     --blanc: white;
     --grid: #cccccc;
-    --verteClaire: #4eaf6e;
+    --verteClaire: #f90505;
     --verteTransparent: #41995e21;
 }
 
 
 /* #1890bd */
 
+.o_onboarding.o_onboarding_blue .o_onboarding_wrap {
+    background-color: rgb(174 0 1 / 47%);
+    background-image: -webkit-gradient(linear, left top, left bottom, from(rgba(96, 171, 195, 0.5)), to(#4187AE));
+    background-image: -webkit-linear-gradient(top, rgba(96, 171, 195, 0.5), #4187AE);
+    background-image: -moz-linear-gradient(top, rgba(96, 171, 195, 0.5), #4187AE);
+    background-image: -ms-linear-gradient(top, rgba(96, 171, 195, 0.5), #4187AE);
+    background-image: -o-linear-gradient(top, rgba(96, 171, 195, 0.5), #4187AE);
+    background-image: linear-gradient(to bottom, rgb(174 0 1 / 54%), #ae000161);
+    box-shadow: inset 0 -7px 20px -5px rgb(0 0 0 / 30%);
+}
+
 
 /*------------ a ----------------- */
+
+.btn-primary {
+    color: #FFFFFF;
+    background-color: #be0911;
+    border-color: #aa0000;
+}
 
 a {
     color: var(--verteClaire);
