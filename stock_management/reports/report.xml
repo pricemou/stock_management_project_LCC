@@ -37,4 +37,14 @@
         paperformat="custom_report_paperformat"
     />
 
+    <report
+        id="report_money_transaction_notification"
+        string="Rapport de transaction"
+        model="account.payment"
+        report_type="qweb-html"
+        name="stock_management.report_money_transaction"
+        file="stock_management.report_money_transaction"
+        paperformat="custom_report_paperformat"
+    />
+
 </odoo>

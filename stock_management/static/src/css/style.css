@@ -204,7 +204,7 @@ a:hover {
 .text_value_color:hover {
     font-size: 19px;
     font-weight: 500;
-    color: #ef7c29;
+    color: #f30404;
 }
 
 
@@ -216,7 +216,7 @@ a:hover {
 }
 
 .dropdown-item:hover {
-    background-color: #ef7c29;
+    background-color: #f30404;
     color: white;
 }
 
@@ -225,7 +225,7 @@ a:hover {
 }
 
 .o_button_icon {
-    color: darkorange !important;
+    color: #f30404 !important;
 }
 
 .o_notebook ul.nav.nav-tabs a {
@@ -241,7 +241,7 @@ a:hover {
 }
 
 .clr-orange {
-    color: darkorange;
+    color: #f30404;
 }
 
 .clr-green {

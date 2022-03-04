@@ -19,10 +19,52 @@ class ConstructionProgram(models.Model):
         string='Les maisons du programme')
     # client_ids = fields.Many2many(
     #     comodel_name='construction.client', string='Clients liés')
+    warehouse_id = fields.Many2one('stock.warehouse', string="Entrepôt")
+    out_type_id = fields.Many2one(
+        comodel_name='stock.picking.type', string='Opération de sortie', related="warehouse_id.out_type_id")
 
     _sql_constraints = [
         ('name_uniq', 'unique (name)', "Ce nom de programme est déjà utilisé !"),
     ]
+
+    @api.model
+    def create(self, vals):
+        result = ''
+        wrd_list = vals['name'].split(' ')
+        if len(wrd_list) >= 2:
+            for word in wrd_list:
+                result += str(word[0])
+        else:
+            result = str(vals['name'][:3])
+
+        new_warehouse = self.env['stock.warehouse'].sudo().create(
+            {
+                'name': vals['name'],
+                'code': result.upper()
+            })
+        vals['warehouse_id'] = new_warehouse.id
+        return super(ConstructionProgram, self).create(vals)
+
+    @api.multi
+    def _track_template(self, tracking):
+        res = super(ConstructionProgram, self)._track_template(tracking)
+        _logger.info('***** res *****')
+        _logger.info(res)
+        test_task = self[0]
+        _logger.info('***** test_task *****')
+        _logger.info(test_task)
+        changes, tracking_value_ids = tracking[test_task.id]
+        _logger.info('***** changes *****')
+        _logger.info(changes)
+        _logger.info('***** tracking_value_ids *****')
+        _logger.info(tracking_value_ids)
+        # if 'city' in changes and test_task.stage_id.mail_template_id:
+        #     res['stage_id'] = (test_task.stage_id.mail_template_id, {
+        #         'auto_delete_message': True,
+        #         'subtype_id': self.env['ir.model.data'].xmlid_to_res_id('mail.mt_note'),
+        #         'notif_layout': 'mail.mail_notification_light'
+        #     })
+        return res
 
     # @api.constrains('name')
     # def _check_name_unicity(self):
@@ -111,7 +153,7 @@ class ConstructionHouse(models.Model):
     @api.multi
     def open_stock_move(self):
         return {
-            'name': _('Rapport de stock'),
+            'name': _('Rapport des sorties'),
             'domain': [('house_id', '=', self.id)],
             'context': {'group_by': ['work_id', 'product_id']},
             'view_type': 'form',
@@ -267,15 +309,15 @@ class StockPickInherit(models.Model):
     _inherit = "stock.picking"
 
     client_id = fields.Many2one(
-        comodel_name='construction.client', string='Client', required=True)
+        comodel_name='construction.client', string='Client')
     program_id = fields.Many2one(
         comodel_name='construction.program', string='Programme', domain="[]", required=True)
     house_id = fields.Many2one(
         comodel_name='construction.house', string='Maison',
-        domain="[('program_id', '=', program_id),('client_id', '=', client_id)]", required=True
+        domain="[('program_id', '=', program_id),('client_id', '=', client_id)]"
     )
     work_id = fields.Many2one(
-        comodel_name='construction.work', string='Ouvrage', domain="[]", required=True
+        comodel_name='construction.work', string='Ouvrage', domain="[]"
     )
 
     @api.onchange('client_id')
@@ -300,6 +342,12 @@ class StockPickInherit(models.Model):
     def action_generate_backorder_wizard(self):
         raise ValidationError(
             _("La quantité que vous avez demandé n'est pas disponible dans l'entrepôt.\nVeuillez mettre à jour le stock ou annuler la réservation."))
+
+    @api.model
+    def create(self, vals):
+        self.message_post(
+            body=_('The backorder <a href=# data-oe-model=stock.picking>Test</a> has been created.'))
+        return super(StockPickInherit, self).create(vals)
 
     # @api.multi
     # def write(self, vals):
@@ -394,8 +442,37 @@ class StockMoveLineInherit(models.Model):
 
         return super(StockMoveLineInherit, self).write(vals)
 
-    
 
+class InheritAccountPayment(models.Model):
+    _inherit = "account.payment"
 
+    @api.model
+    def create(self, vals):
+        _logger.info('**** InheritAccountPayment ****')
+        users_ids = self.env.ref(
+            'stock_management.group_stock_management_manager').users
+        if len(users_ids) > 0:
+            _logger.info(users_ids)
 
+            admin = users_ids[0].partner_id
+            _logger.info(admin)
+            _logger.info(admin.company_id.email)
+            _logger.info(admin.email_formatted)
 
+            admins = users_ids.mapped('partner_id').ids
+            _logger.info(admins)
+            partners = ",".join(map(str, admins))
+            _logger.info(partners)
+
+            template_id = self.env.ref(
+                'stock_management.sm_mail_template').id
+            _logger.info(template_id)
+            template = self.env['mail.template'].browse(template_id)
+            _logger.info(template)
+
+            data = {
+                'test':'one'
+            }
+            template.sudo().with_context(data=data).send_mail(admin.id, force_send=True)
+
+        return super(InheritAccountPayment, self).create(vals)

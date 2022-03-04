@@ -56,6 +56,17 @@
             <field name="model">construction.program</field>
             <field name="arch" type="xml">
                 <form string="Programme">
+                    <header>
+                        <button name="%(action_create_transfert)d"
+                                string="Demander une sortie de matériaux"
+                                type="action"
+                                class="oe_highlight"
+                                context="{
+                                    'default_picking_type_id': out_type_id,
+                                    'default_program_id': active_id
+                                }"
+                            />
+                    </header>
                     <sheet>
                         <div class="oe_title">
                             <h1><field name="name" placeholder="Libellé" required="True"/></h1>
@@ -67,6 +78,8 @@
                                 <field name="district"/>
                             </group>
                             <group>
+                                <field name="warehouse_id"/>
+                                <field name="out_type_id"/>
                                 <field name="description"/>
                                 <!-- <field name="client_ids" widget="many2many_tags"/> -->
                             </group>
@@ -627,13 +640,11 @@
             <field name="model">stock.picking</field>
             <field name="inherit_id" ref="stock.view_picking_form"/>
             <field name="arch" type="xml">
-                <field name="partner_id" position="replace">
+                <field name="partner_id" position="after">
                     <field name="client_id"/>
-                    <field name="program_id"/>
                     <field name="house_id"/>
-                </field>
-                <field name="picking_type_id" position="replace">
                     <field name="work_id"/>
+                    <field name="program_id"/>
                 </field>
                 <field name="origin" position="replace">
                 </field>
@@ -702,8 +713,6 @@
                 </xpath>
             </field>
         </record>
-
-        <!-- account invoice -->
 
     </data>
 
