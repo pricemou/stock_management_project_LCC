@@ -22,11 +22,8 @@
     background-image: linear-gradient(to bottom, rgb(174 0 1 / 54%), #ae000161);
     box-shadow: inset 0 -7px 20px -5px rgb(0 0 0 / 30%);
 }
-
-
 /*------------ a ----------------- */
-
-.btn-primary {
+.btn-primary{
     color: #FFFFFF;
     background-color: #be0911;
     border-color: #aa0000;
@@ -207,7 +204,7 @@ a:hover {
 .text_value_color:hover {
     font-size: 19px;
     font-weight: 500;
-    color: #ef7c29;
+    color: #f30404;
 }
 
 
@@ -219,7 +216,7 @@ a:hover {
 }
 
 .dropdown-item:hover {
-    background-color: #ef7c29;
+    background-color: #f30404;
     color: white;
 }
 
@@ -228,7 +225,7 @@ a:hover {
 }
 
 .o_button_icon {
-    color: darkorange !important;
+    color: #f30404 !important;
 }
 
 .o_notebook ul.nav.nav-tabs a {
@@ -244,7 +241,7 @@ a:hover {
 }
 
 .clr-orange {
-    color: darkorange;
+    color: #f30404;
 }
 
 .clr-green {
