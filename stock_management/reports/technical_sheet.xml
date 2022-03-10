@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
-
     <template id="techsheet_template">
         <t t-set="data_report_landscape" t-value="True"/>
         <t t-set="full_width" t-value="True"/>
@@ -47,7 +46,7 @@
         <t t-set="data_report_landscape" t-value="True"/>
         <t t-set="full_width" t-value="True"/>
         <t t-call="web.html_container">
-            <t t-foreach="docs" t-as="house">
+            <t t-foreach="docs" t-as="o">
                 <div class="flyer_page">
                     <div class="container">
                         <div class="row clr-green text-center">
@@ -55,17 +54,17 @@
                             <div class="col cst-report-header py-1 font-weight-bold mt-4 border-white fs-xl">Utilisation</div>
                             <div class="col cst-report-header py-1 font-weight-bold mt-4 border-white fs-xl">Progression</div>
                         </div>
-                        <t t-foreach="house.type_id.work_ids" t-as="work">
+                        <t t-foreach="o.type_id.work_ids" t-as="work">
                             <div class="row d-flex align-items-center py-3 border-bottom-inset clr-dimgray font-weight-bold">
                                 <div class="col clr-00A09D"><t t-esc="work.name"/></div>
                                 <div class="col row fs-14">
                                     <t t-set="work_init_qty" t-value="0"/>
                                     <t t-set="work_done_qty" t-value="0"/>
-                                    <t t-foreach="house.qty_gen_ids" t-as="qty_gen">
+                                    <t t-foreach="o.qty_gen_ids" t-as="qty_gen">
                                         <t t-if="qty_gen.work_generator_id.work_id.id == work.id">
                                             <t t-set="work_init_qty" t-value="work_init_qty + qty_gen.quantity"/>
                                             <t t-set="count_moves" t-value="0"/>
-                                            <t t-foreach="house.move_line_ids" t-as="move">
+                                            <t t-foreach="o.move_line_ids" t-as="move">
                                                 <t t-if="move.product_id.id == qty_gen.work_generator_id.techsheet_id.material_id.product_prdt_id.id">
                                                     <t t-set="count_moves" t-value="count_moves + move.qty_done"/>
                                                 </t>

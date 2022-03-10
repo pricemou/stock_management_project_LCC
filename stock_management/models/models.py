@@ -476,3 +476,9 @@ class InheritAccountPayment(models.Model):
             template.sudo().with_context(data=data).send_mail(admin.id, force_send=True)
 
         return super(InheritAccountPayment, self).create(vals)
+
+
+class StockMoveLineInherit(models.Model):
+    _inherit = "account.invoice"
+    
+    typeReglement = fields.Selection(string='Type Reglement', selection=[('Cheque', 'Cheque'), ('Nature', 'Nature'), ('Virement', 'Virement'),('Espece', 'Espece'),],default='Espece')
