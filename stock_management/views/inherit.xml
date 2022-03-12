@@ -1,15 +1,80 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
 
-    <!-- <record id="account_common_report_view_inherit" model="ir.ui.view">
-        <field name="name">Journals Audit</field>
+    <record id="account_aged_balance_view_inherit" model="ir.ui.view">
+        <field name="name">Aged Partner Preview</field>
+        <field name="model">account.aged.trial.balance</field>
+        <field name="inherit_id" ref="accounting_pdf_reports.account_aged_balance_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='check_report']" position="after">
+                <button class="oe_highlight" string="Visualiser" name="preview_report" type="object"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="accounting_report_view_inherit" model="ir.ui.view">
+        <field name="name">Accounting Report Preview</field>
+        <field name="model">accounting.report</field>
+        <field name="inherit_id" ref="account.account_common_report_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='check_report']" position="after">
+                <button class="oe_highlight" string="Visualiser" name="preview_report" type="object"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_report_general_ledger_view_inherit" model="ir.ui.view">
+        <field name="name">General Ledger Inherit</field>
+        <field name="model">account.report.general.ledger</field>
+        <field name="inherit_id" ref="account.account_common_report_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='check_report']" position="after">
+                <button class="oe_highlight" string="Visualiser" name="preview_report" type="object"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_report_print_journal_view_inherit" model="ir.ui.view">
+        <field name="name">Journals Audit Inherit</field>
         <field name="model">account.print.journal</field>
         <field name="inherit_id" ref="account.account_common_report_view"/>
         <field name="arch" type="xml">
             <xpath expr="//button[@name='check_report']" position="after">
-                <button class="oe_highlight" string="Visualiser" name="print_report" type="object"/>
+                <button class="oe_highlight" string="Visualiser" name="preview_report" type="object"/>
             </xpath>
         </field>
-    </record> -->
+    </record>
 
+    <record id="account_report_partner_ledger_view_inherit" model="ir.ui.view">
+        <field name="name">Partner Ledger Inherit</field>
+        <field name="model">account.report.partner.ledger</field>
+        <field name="inherit_id" ref="account.account_common_report_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='check_report']" position="after">
+                <button class="oe_highlight" string="Visualiser" name="preview_report" type="object"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="accounting_tax_report_view_inherit" model="ir.ui.view">
+        <field name="name">Tax Reports Inherit</field>
+        <field name="model">account.tax.report</field>
+        <field name="inherit_id" ref="account.account_common_report_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='check_report']" position="after">
+                <button class="oe_highlight" string="Visualiser" name="preview_report" type="object"/>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="account_report_balance_view_inherit" model="ir.ui.view">
+        <field name="name">Trial Balance Inherit</field>
+        <field name="model">account.balance.report</field>
+        <field name="inherit_id" ref="account.account_common_report_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='check_report']" position="after">
+                <button class="oe_highlight" string="Visualiser" name="preview_report" type="object"/>
+            </xpath>
+        </field>
+    </record>
 </odoo>

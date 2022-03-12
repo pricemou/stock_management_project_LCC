@@ -4,7 +4,7 @@
     'name': 'Gestion de stock',
     'category': 'Extras tool',
     'author': 'Pricemou Claude, Willof-God Bassanti',
-    'version': '1.0',
+    'version': '2.0',
     'depends': [
         'base',
         'account',
@@ -20,7 +20,7 @@
         'security/security.xml',
         'security/ir.model.access.csv',
         'security/ir.rule.xml',
-        'views/templates.xml',
+        'views/assets.xml',
         'views/inherit.xml',
         'menu/menu.xml',
         'views/views.xml',

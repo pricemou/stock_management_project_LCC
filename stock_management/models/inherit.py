@@ -1,28 +1,95 @@
 from odoo import models, fields, api, _
 from odoo.exceptions import ValidationError
 from odoo.exceptions import UserError
+from dateutil.relativedelta import relativedelta
 import logging
 _logger = logging.getLogger(__name__)
 
 
-# class SMAccountingReport(models.TransientModel):
-#     _inherit = "accounting.report"
+class SMAcountingReport(models.TransientModel):
+    _inherit = "account.common.report"
 
-#     @api.multi
-#     def check_report(self):
-#         self.ensure_one()
-#         data = {}
-#         data['ids'] = self.env.context.get('active_ids', [])
-#         data['model'] = self.env.context.get('active_model', 'ir.ui.menu')
-#         data['form'] = self.read(['date_from', 'date_to', 'journal_ids', 'target_move', 'company_id'])[0]
-#         used_context = self._build_contexts(data)
-#         data['form']['used_context'] = dict(used_context, lang=self.env.context.get('lang') or 'en_US')
-#         return self.with_context(discard_logo_check=True)._preview_report(data)
+    def preview_report(self):
+        res = super(SMAcountingReport, self).check_report()
+        return self.with_context(discard_logo_check=True)._preview_report(res['data'])
+
+class SMAccountingReport(models.TransientModel):
+    _inherit = "accounting.report"
+
+    def _preview_report(self, data):
+        data['form'].update(self.read(['date_from_cmp', 'debit_credit', 'date_to_cmp', 'filter_cmp',
+                            'account_report_id', 'enable_filter', 'label_filter', 'target_move'])[0])
+        return self.env.ref('stock_management.action_report_financial_preview').report_action(self, data=data, config=False)
+
+class SMAcountReportGeneralLedger(models.TransientModel):
+    _inherit = "account.report.general.ledger"
+
+    def _preview_report(self, data):
+        data = self.pre_print_report(data)
+        data['form'].update(self.read(['initial_balance', 'sortby'])[0])
+        if data['form'].get('initial_balance') and not data['form'].get('date_from'):
+            raise UserError(_("You must define a Start Date"))
+        records = self.env[data['model']].browse(data.get('ids', []))
+        return self.env.ref('stock_management.action_report_general_ledger_preview').with_context(landscape=True).report_action(records, data=data)
 
 
-# class SMAccountPrintJournal(models.TransientModel):
-#     _name = "account.print.journal"
+class SMAcountPrintJournal(models.TransientModel):
+    _inherit = "account.print.journal"
 
-#     @api.multi
-#     def print_technical_sheet(self):
-#         return self.env.ref('stock_management.print_report').report_action(self)
+    def _preview_report(self, data):
+        data = self.pre_print_report(data)
+        data['form'].update({'sort_selection': self.sort_selection})
+        return self.env.ref('stock_management.action_report_journal_preview').with_context(landscape=True).report_action(self, data=data)
+
+
+class SMAcountPartnerLedger(models.TransientModel):
+    _inherit = "account.report.partner.ledger"
+
+    def _preview_report(self, data):
+        data = self.pre_print_report(data)
+        data['form'].update({'reconciled': self.reconciled,
+                            'amount_currency': self.amount_currency})
+        return self.env.ref('stock_management.action_report_partnerledger_preview').report_action(self, data=data)
+
+
+class SMAcountTaxReport(models.TransientModel):
+    _inherit = 'account.tax.report'
+
+    def _preview_report(self, data):
+        return self.env.ref('stock_management.action_report_account_tax_preview').report_action(self, data=data)
+
+
+class SMAcountBalanceReport(models.TransientModel):
+    _inherit = 'account.balance.report'
+
+    def _preview_report(self, data):
+        data = self.pre_print_report(data)
+        records = self.env[data['model']].browse(data.get('ids', []))
+        return self.env.ref('stock_management.action_report_trial_balance_preview').report_action(records, data=data)
+
+
+class SMAcountAgedTrialBalance(models.TransientModel):
+    _inherit = 'account.aged.trial.balance'
+
+    def _preview_report(self, data):
+        res = {}
+        data = self.pre_print_report(data)
+        data['form'].update(self.read(['period_length'])[0])
+        period_length = data['form']['period_length']
+        if period_length <= 0:
+            raise UserError(_('You must set a period length greater than 0.'))
+        if not data['form']['date_from']:
+            raise UserError(_('You must set a start date.'))
+
+        start = data['form']['date_from']
+
+        for i in range(5)[::-1]:
+            stop = start - relativedelta(days=period_length - 1)
+            res[str(i)] = {
+                'name': (i != 0 and (str((5-(i+1)) * period_length) + '-' + str((5-i) * period_length)) or ('+'+str(4 * period_length))),
+                'stop': start.strftime('%Y-%m-%d'),
+                'start': (i != 0 and stop.strftime('%Y-%m-%d') or False),
+            }
+            start = stop - relativedelta(days=1)
+        data['form'].update(res)
+        return self.env.ref('stock_management.action_report_aged_partner_balance_preview').with_context(landscape=True).report_action(self, data=data)

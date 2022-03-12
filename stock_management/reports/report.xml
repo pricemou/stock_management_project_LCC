@@ -47,4 +47,74 @@
         paperformat="custom_report_paperformat"
     />
 
+    <report
+        id="action_report_general_ledger_preview"
+        model="account.report.general.ledger"
+        string="General Ledger"
+        menu="False"
+        report_type="qweb-html"
+        name="accounting_pdf_reports.report_generalledger"
+        file="accounting_pdf_reports.report_generalledger"
+    />
+
+    <report
+        id="action_report_partnerledger_preview"
+        model="account.report.partner.ledger"
+        string="Partner Ledger"
+        menu="False"
+        report_type="qweb-html"
+        name="accounting_pdf_reports.report_partnerledger"
+        file="accounting_pdf_reports.report_partnerledger"
+    />
+
+    <report
+        id="action_report_trial_balance_preview"
+        model="account.balance.report"
+        string="Trial Balance"
+        menu="False"
+        report_type="qweb-html"
+        name="accounting_pdf_reports.report_trialbalance"
+        file="accounting_pdf_reports.report_trialbalance"
+    />
+
+    <report
+        id="action_report_financial_preview"
+        model="account.financial.report"
+        string="Financial report"
+        menu="False"
+        report_type="qweb-html"
+        name="accounting_pdf_reports.report_financial"
+        file="accounting_pdf_reports.report_financial"
+    />
+
+    <report
+        id="action_report_account_tax_preview"
+        model="account.tax.report"
+        string="Tax Report"
+        menu="False"
+        report_type="qweb-html"
+        name="accounting_pdf_reports.report_tax"
+        file="accounting_pdf_reports.report_tax"
+    />
+
+    <report
+        id="action_report_aged_partner_balance_preview"
+        model="res.partner"
+        string="Aged Partner Balance"
+        menu="False"
+        report_type="qweb-html"
+        name="accounting_pdf_reports.report_agedpartnerbalance"
+        file="accounting_pdf_reports.report_agedpartnerbalance"
+    />
+
+    <report
+        id="action_report_journal_preview"
+        model="account.common.journal.report"
+        string="Journals Audit"
+        menu="False"
+        report_type="qweb-html"
+        name="accounting_pdf_reports.report_journal"
+        file="accounting_pdf_reports.report_journal"
+    />
+
 </odoo>
