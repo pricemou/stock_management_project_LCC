@@ -714,44 +714,6 @@
             </field>
         </record>
 
-
-        <!-- change liquidite from experse -->
-        <record id="view_bank_statement_form_inherit" model="ir.ui.view">
-            <field name="name">account.bank.statement.inherit</field>
-            <field name="model">account.bank.statement</field>
-            <field name="inherit_id" ref="account.view_bank_statement_form"/>
-            <field name="arch" type="xml">
-                <field name="journal_type" position="attributes">
-                  <attribute name="attrs">{'invisible': 0}</attribute>
-                </field>
-            </field>
-        </record>
-        <!-- account invoice -->
-        
-        <record id="add_filed_account" model="ir.ui.view">
-            <field name="name">account.form</field>
-            <field name="model">account.invoice</field>
-            <field name="type">form</field>
-            <field name="inherit_id" ref="account.invoice_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='payment_term_id']" position="after">
-                    <field name="typeReglement"/>
-                </xpath>
-            </field>
-        </record>
-
-        <record id="add_filed_account_supplie" model="ir.ui.view">
-            <field name="name">account.form</field>
-            <field name="model">account.invoice</field>
-            <field name="type">form</field>
-            <field name="inherit_id" ref="account.invoice_supplier_form"/>
-            <field name="arch" type="xml">
-                <xpath expr="//field[@name='partner_id']" position="after">
-                    <field name="typeReglement"/>
-                </xpath>
-            </field>
-        </record>
-
     </data>
 
 </odoo>
