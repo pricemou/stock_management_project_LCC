@@ -476,3 +476,43 @@ class InheritAccountPayment(models.Model):
             template.sudo().with_context(data=data).send_mail(admin.id, force_send=True)
 
         return super(InheritAccountPayment, self).create(vals)
+
+class InheritAccountPayment(models.Model):
+    _inherit = "account.payment"
+
+    @api.model
+    def create(self, vals):
+        _logger.info('**** InheritAccountPayment ****')
+        users_ids = self.env.ref(
+            'stock_management.group_stock_management_manager').users
+        if len(users_ids) > 0:
+            _logger.info(users_ids)
+
+            admin = users_ids[0].partner_id
+            _logger.info(admin)
+            _logger.info(admin.company_id.email)
+            _logger.info(admin.email_formatted)
+
+            admins = users_ids.mapped('partner_id').ids
+            _logger.info(admins)
+            partners = ",".join(map(str, admins))
+            _logger.info(partners)
+
+            template_id = self.env.ref(
+                'stock_management.sm_mail_template').id
+            _logger.info(template_id)
+            template = self.env['mail.template'].browse(template_id)
+            _logger.info(template)
+
+            data = {
+                'test':'one'
+            }
+            template.sudo().with_context(data=data).send_mail(admin.id, force_send=True)
+
+        return super(InheritAccountPayment, self).create(vals)
+
+
+class StockMoveLineInherit(models.Model):
+    _inherit = "account.invoice"
+    
+    typeReglement = fields.Selection(string='Type Reglement', selection=[('Cheque', 'Cheque'), ('Nature', 'Nature'), ('Virement', 'Virement'),('Espece', 'Espece'),],default='Espece')

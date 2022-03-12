@@ -1,6 +1,5 @@
 <?xml version='1.0' encoding='utf-8'?>
 <odoo>
-
     <template id="techsheet_template">
         <t t-set="data_report_landscape" t-value="True"/>
         <t t-set="full_width" t-value="True"/>
