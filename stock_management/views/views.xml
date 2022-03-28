@@ -649,8 +649,8 @@
                 <field name="origin" position="replace">
                 </field>
                 <field name="scheduled_date" position="before">
-                    <field name="partner_id" string="Superviseur"/>
-                    <field name="picking_type_id" string="Type d'opération"/>
+                    <field name="superviseur_id" string="Superviseur"/>
+                    <!-- <field name="picking_type_id" string="Type d'opération"/> -->
                     <field name="create_uid" string="Effectué par"/>
                 </field>
             </field>

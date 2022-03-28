@@ -2,27 +2,27 @@
 <odoo>
     <template id="trial_balance_inherit" inherit_id="accounting_pdf_reports.report_trialbalance">
         <xpath expr="//div[@class='page']" position="replace">
-            <h2 class="text-center"><span t-esc="res_company.name"/>: Trial Balance</h2>
+            <h2 class="text-center"><span t-esc="res_company.name"/>:  Balance de vérification</h2>
                     <div class="row mt32">
                         <div class="col-4">
-                            <strong>Display Account:</strong>
+                            <strong>Afficher le compte:</strong>
                             <p>
-                                <span t-if="data['display_account'] == 'all'">All accounts</span>
-                                <span t-if="data['display_account'] == 'movement'">With movements</span>
-                                <span t-if="data['display_account'] == 'not_zero'">With balance not equal to zero</span>
+                                <span t-if="data['display_account'] == 'all'">Tous les comptes</span>
+                                <span t-if="data['display_account'] == 'movement'">Avec des mouvements</span>
+                                <span t-if="data['display_account'] == 'not_zero'"> Avec un solde non égal à zéro</span>
                             </p>  
                         </div>
                         <div class="col-4">
                             <p>
-                                <t t-if="data['date_from']"><strong>Date from :</strong> <span t-esc="data['date_from']"/><br/></t>
-                                <t t-if="data['date_to']"><strong>Date to :</strong> <span t-esc="data['date_to']"/></t>
+                                <t t-if="data['date_from']"><strong>Date du :</strong> <span t-esc="data['date_from']"/><br/></t>
+                                <t t-if="data['date_to']"><strong>Date au :</strong> <span t-esc="data['date_to']"/></t>
                             </p>
                         </div>
                         <div class="col-4">
                             <strong>Target Moves:</strong>
                             <p>
-                                <span t-if="data['target_move'] == 'all'">All Entries</span>
-                                <span t-if="data['target_move'] == 'posted'">All Posted Entries</span>
+                                <span t-if="data['target_move'] == 'all'">Toutes les entrées</span>
+                                <span t-if="data['target_move'] == 'posted'">Toutes les entrées publiées</span>
                             </p>
                         </div>
                     </div>
@@ -31,7 +31,7 @@
                         <thead>
                             <tr  style='height:100%;background-color:#ae0001;' class="text-white ">
                                 <th >Code</th>
-                                <th>Account</th>
+                                <th>Compte</th>
                                 <th class="text-right">Debit</th>
                                 <th class="text-right">Credit</th>
                                 <th class="text-right">Balance</th>

@@ -20,8 +20,7 @@ class ConstructionProgram(models.Model):
     # client_ids = fields.Many2many(
     #     comodel_name='construction.client', string='Clients liés')
     warehouse_id = fields.Many2one('stock.warehouse', string="Entrepôt")
-    out_type_id = fields.Many2one(
-        comodel_name='stock.picking.type', string='Opération de sortie', related="warehouse_id.out_type_id")
+    out_type_id = fields.Many2one(comodel_name='stock.picking.type', string='Opération de sortie', related="warehouse_id.out_type_id")
 
     _sql_constraints = [
         ('name_uniq', 'unique (name)', "Ce nom de programme est déjà utilisé !"),
@@ -307,11 +306,11 @@ class ConstructionTechSheet(models.Model):
 
 class StockPickInherit(models.Model):
     _inherit = "stock.picking"
-
-    client_id = fields.Many2one(
-        comodel_name='construction.client', string='Client')
-    program_id = fields.Many2one(
-        comodel_name='construction.program', string='Programme', domain="[]", required=True)
+    
+    partner_id =  fields.Many2one(comodel_name='res.partner', string='Superviseur')
+    client_id = fields.Many2one(comodel_name='construction.client', string='Client')
+    superviseur_id = fields.Many2one(comodel_name='res.partner', string='Superviseur')
+    program_id = fields.Many2one(comodel_name='construction.program', string='Programme', domain="[]", required=True)
     house_id = fields.Many2one(
         comodel_name='construction.house', string='Maison',
         domain="[('program_id', '=', program_id),('client_id', '=', client_id)]"
