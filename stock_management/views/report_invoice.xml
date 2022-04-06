@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <template id="report_invoice_document_with_payments" inherit_id="account.report_invoice_document_with_payments">
+            <xpath expr="//i[hasclass('oe_payment_label')]" position="replace">
+                <i class="oe_form_field text-left oe_payment_label"><t t-esc="payment_vals['journal_name']"/> ( <t t-esc="payment_vals['payment_method']"/> <t t-if="payment_vals['check_num']"  t-esc="': ' + payment_vals['check_num']"/> ) | Payé le <t t-esc="payment_vals['date']" t-options='{"widget": "date"}'/></i>
+            </xpath>
+        </template>
+
+    </data>
+</odoo>

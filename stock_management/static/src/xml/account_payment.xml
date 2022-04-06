@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<templates xml:space="preserve">
+
+    <t t-extend="ShowPaymentInfo">
+        <t t-jquery=".o_field_widget" t-operation="replace">
+            <i class="o_field_widget text-left o_payment_label"><t t-esc="line.journal_name"/> ( <t t-esc="line.payment_method"/> <t t-if="line.check_num"  t-esc="': ' + line.check_num"/> ) | Payé le <t t-esc="line.date"></t></i>
+        </t>
+    </t>
+
+</templates>
