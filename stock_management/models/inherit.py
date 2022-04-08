@@ -13,6 +13,7 @@ class SMAcountingReport(models.TransientModel):
         res = super(SMAcountingReport, self).check_report()
         return self.with_context(discard_logo_check=True)._preview_report(res['data'])
 
+
 class SMAccountingReport(models.TransientModel):
     _inherit = "accounting.report"
 
@@ -20,6 +21,7 @@ class SMAccountingReport(models.TransientModel):
         data['form'].update(self.read(['date_from_cmp', 'debit_credit', 'date_to_cmp', 'filter_cmp',
                             'account_report_id', 'enable_filter', 'label_filter', 'target_move'])[0])
         return self.env.ref('stock_management.action_report_financial_preview').report_action(self, data=data, config=False)
+
 
 class SMAcountReportGeneralLedger(models.TransientModel):
     _inherit = "account.report.general.ledger"
@@ -93,3 +95,29 @@ class SMAcountAgedTrialBalance(models.TransientModel):
             start = stop - relativedelta(days=1)
         data['form'].update(res)
         return self.env.ref('stock_management.action_report_aged_partner_balance_preview').with_context(landscape=True).report_action(self, data=data)
+
+
+class SMAccountPayment(models.Model):
+    _inherit = 'account.payment'
+
+    check_num = fields.Char(string='Numéro du chèque')
+
+
+class SMAccountInvoice(models.Model):
+    _inherit = 'account.invoice'
+
+    def _get_payments_vals(self):
+        _logger.info('*** _get_payments_vals ***')
+        res = super(SMAccountInvoice, self)._get_payments_vals()
+        _logger.info('res')
+
+        for payment in res:
+            _logger.info('*** payment ***')
+            payment_id = self.env['account.payment'].browse(
+                payment['account_payment_id'])
+            _logger.info(payment_id)
+            payment['payment_method'] = payment_id.payment_method_id.name
+            payment['check_num'] = payment_id.check_num
+            _logger.info(payment['payment_method'])
+
+        return res

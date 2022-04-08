@@ -58,7 +58,7 @@
 
     <!-- paramétrage -->
     <menuitem id="construction_params_menu" parent="construction_root"
-    name="Paramétrages" sequence="5"/>
+    name="Configuration" sequence="99"/>
 
     <record id="action_construction_type" model="ir.actions.act_window">
       <field name="name">Type de maison</field>
@@ -94,25 +94,16 @@
 
 
     <!-- opérations -->
-    <menuitem id="construction_operations_menu" parent="construction_root"
-    name="Opérations" sequence=""/>
 
-    <menuitem id="construction_stock_in_menu" parent="construction_operations_menu"
-    name="Approvisionnement" action="stock.action_inventory_form" sequence=""/>
+    <menuitem id="construction_stock_in_menu"
+      parent="construction_root"
+      name="Approvisionnements"
+      action="stock.action_inventory_form"
+      sequence="5"
+    />
 
 
-    <record id="action_create_transfert" model="ir.actions.act_window">
-      <field name="name">Sortie de matériau</field>
-      <field name="res_model">stock.picking</field>
-      <field name="view_mode">form</field>
-      <field name="target">new</field>
-    </record>
-
-    <record id="stock.action_picking_tree_all" model="ir.actions.act_window">
-      <field name="name">Sorties de matériaux</field>
-    </record>
-    <menuitem id="construction_stock_out_menu" parent="construction_operations_menu"
-    name="Sortie de matériaux" action="stock.action_picking_tree_all" sequence="6"/>
+    <!-- brouillon -->
 
     <!-- <record id="action_construction_qty_generator" model="ir.actions.act_window">
       <field name="name">Paramétrage de quantité</field>
