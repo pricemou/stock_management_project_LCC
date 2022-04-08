@@ -50,7 +50,7 @@
     <report
         id="action_report_general_ledger_preview"
         model="account.report.general.ledger"
-        string="General Ledger"
+        string="Grand livre général"
         menu="False"
         report_type="qweb-html"
         name="accounting_pdf_reports.report_generalledger"
@@ -60,7 +60,7 @@
     <report
         id="action_report_partnerledger_preview"
         model="account.report.partner.ledger"
-        string="Partner Ledger"
+        string="Registre des partenaires"
         menu="False"
         report_type="qweb-html"
         name="accounting_pdf_reports.report_partnerledger"
@@ -70,7 +70,7 @@
     <report
         id="action_report_trial_balance_preview"
         model="account.balance.report"
-        string="Trial Balance"
+        string="Balance de vérification"
         menu="False"
         report_type="qweb-html"
         name="accounting_pdf_reports.report_trialbalance"
@@ -80,7 +80,7 @@
     <report
         id="action_report_financial_preview"
         model="account.financial.report"
-        string="Financial report"
+        string="Rapport financier"
         menu="False"
         report_type="qweb-html"
         name="accounting_pdf_reports.report_financial"
@@ -90,7 +90,7 @@
     <report
         id="action_report_account_tax_preview"
         model="account.tax.report"
-        string="Tax Report"
+        string="Rapport fiscal"
         menu="False"
         report_type="qweb-html"
         name="accounting_pdf_reports.report_tax"
@@ -100,7 +100,7 @@
     <report
         id="action_report_aged_partner_balance_preview"
         model="res.partner"
-        string="Aged Partner Balance"
+        string="Solde du partenaire âgé"
         menu="False"
         report_type="qweb-html"
         name="accounting_pdf_reports.report_agedpartnerbalance"
@@ -110,7 +110,7 @@
     <report
         id="action_report_journal_preview"
         model="account.common.journal.report"
-        string="Journals Audit"
+        string="Journaux d'audit"
         menu="False"
         report_type="qweb-html"
         name="accounting_pdf_reports.report_journal"

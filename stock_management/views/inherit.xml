@@ -68,7 +68,7 @@
     </record>
 
     <record id="account_report_balance_view_inherit" model="ir.ui.view">
-        <field name="name">Trial Balance Inherit</field>
+        <field name="name">Hériter de la balance de vérification</field>
         <field name="model">account.balance.report</field>
         <field name="inherit_id" ref="account.account_common_report_view"/>
         <field name="arch" type="xml">

@@ -20,12 +20,12 @@
                         <div class="col-4">
                             <strong>Déplacements de la cible:</strong>
                             <p t-if="data['target_move'] == 'all'">Toutes les entrées</p>
-                            <p t-if="data['target_move'] == 'posted'">All Posted Entries</p>
+                            <p t-if="data['target_move'] == 'posted'">Toutes les entrées publiées</p>
                         </div>
                     </div>
                     <div class="row mb32">
                         <div class="col-4">
-                            <strong>Sorted By:</strong>
+                            <strong>Trié par:</strong>
                             <p t-if="data['sortby'] == 'sort_date'">Date</p>
                             <p t-if="data['sortby'] == 'sort_journal_partner'">Journal et partenaire</p>
                         </div>

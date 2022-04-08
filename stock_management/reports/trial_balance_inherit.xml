@@ -19,7 +19,7 @@
                             </p>
                         </div>
                         <div class="col-4">
-                            <strong>Target Moves:</strong>
+                            <strong>Mouvements ciblés :</strong>
                             <p>
                                 <span t-if="data['target_move'] == 'all'">Toutes les entrées</span>
                                 <span t-if="data['target_move'] == 'posted'">Toutes les entrées publiées</span>

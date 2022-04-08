@@ -31,7 +31,7 @@
     <menuitem id="construction_house_menu" parent="construction_root"
     name="Liste des maisons" action="action_construction_house" sequence="3"/>
 
-    <record id="action_construction_material" model="ir.actions.act_window">
+    <!-- <record id="action_construction_material" model="ir.actions.act_window">
       <field name="name">Matériaux</field>
       <field name="type">ir.actions.act_window</field>
       <field name="res_model">construction.material</field>
@@ -50,9 +50,9 @@
           price, notes in the quotation, accounting data, procurement methods, etc.
         </p>
       </field>
-    </record>
-    <menuitem id="construction_material_menu" parent="construction_root"
-      name="Matériaux" action="action_construction_material" sequence="4"/>
+    </record> -->
+    <!-- <menuitem id="construction_material_menu" parent="construction_root"
+      name="Matériaux" action="action_construction_material" sequence="4"/> -->
 
 
 

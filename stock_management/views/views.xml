@@ -317,7 +317,7 @@
         </record>
 
         <!-- material -->
-        <record id="material_kanban_view" model="ir.ui.view">
+        <!-- <record id="material_kanban_view" model="ir.ui.view">
             <field name="name">construction.material.view.kanban</field>
             <field name="model">construction.material</field>
             <field name="mode">primary</field>
@@ -333,7 +333,7 @@
                     <attribute name="class">oe_kanban_global_click cst-border-6 border-darkseagreen shadow</attribute>
                 </xpath>
             </field>
-        </record>
+        </record> -->
 
         <record id="material_tree_view" model="ir.ui.view">
             <field name="name">construction.material.view.tree</field>
