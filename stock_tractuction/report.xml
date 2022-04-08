@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="custom_report_paperformat" model="report.paperformat">
+        <field name="name">Format de rapports HTML</field>
+        <field name="default" eval="True"/>
+        <field name="format">custom</field>
+        <field name="page_height">240</field>
+        <field name="page_width">400</field>
+        <field name="orientation">Portrait</field>
+        <field name="margin_top">0</field>
+        <field name="margin_bottom">0</field>
+        <field name="margin_left">0</field>
+        <field name="margin_right">0</field>
+        <field name="header_line" eval="False"/>
+        <field name="header_spacing">0</field>
+        <field name="dpi">90</field>
+    </record>
+
+    <report
+        id="report_techsheet"
+        string="Fiche Technique"
+        model="construction.tech_sheet"
+        report_type="qweb-html"
+        name="stock_management.techsheet_template"
+        file="stock_management.techsheet_template"
+        paperformat="custom_report_paperformat"
+    />
+
+    <report
+        id="report_house"
+        string="Rapport de la maison"
+        model="construction.house"
+        report_type="qweb-html"
+        name="stock_management.house_report"
+        file="stock_management.house_report"
+        paperformat="custom_report_paperformat"
+    />
+
+    <report
+        id="report_money_transaction_notification"
+        string="Rapport de transaction"
+        model="account.payment"
+        report_type="qweb-html"
+        name="stock_management.report_money_transaction"
+        file="stock_management.report_money_transaction"
+        paperformat="custom_report_paperformat"
+    />
+
+    <report
+        id="action_report_general_ledger_preview"
+        model="account.report.general.ledger"
+        string="General Ledger"
+        menu="False"
+        report_type="qweb-html"
+        name="accounting_pdf_reports.report_generalledger"
+        file="accounting_pdf_reports.report_generalledger"
+    />
+
+    <report
+        id="action_report_partnerledger_preview"
+        model="account.report.partner.ledger"
+        string="Partner Ledger"
+        menu="False"
+        report_type="qweb-html"
+        name="accounting_pdf_reports.report_partnerledger"
+        file="accounting_pdf_reports.report_partnerledger"
+    />
+
+    <report
+        id="action_report_trial_balance_preview"
+        model="account.balance.report"
+        string="Trial Balance"
+        menu="False"
+        report_type="qweb-html"
+        name="accounting_pdf_reports.report_trialbalance"
+        file="accounting_pdf_reports.report_trialbalance"
+    />
+
+    <report
+        id="action_report_financial_preview"
+        model="account.financial.report"
+        string="Financial report"
+        menu="False"
+        report_type="qweb-html"
+        name="accounting_pdf_reports.report_financial"
+        file="accounting_pdf_reports.report_financial"
+    />
+
+    <report
+        id="action_report_account_tax_preview"
+        model="account.tax.report"
+        string="Tax Report"
+        menu="False"
+        report_type="qweb-html"
+        name="accounting_pdf_reports.report_tax"
+        file="accounting_pdf_reports.report_tax"
+    />
+
+    <report
+        id="action_report_aged_partner_balance_preview"
+        model="res.partner"
+        string="Aged Partner Balance"
+        menu="False"
+        report_type="qweb-html"
+        name="accounting_pdf_reports.report_agedpartnerbalance"
+        file="accounting_pdf_reports.report_agedpartnerbalance"
+    />
+
+    <report
+        id="action_report_journal_preview"
+        model="account.common.journal.report"
+        string="Journals Audit"
+        menu="False"
+        report_type="qweb-html"
+        name="accounting_pdf_reports.report_journal"
+        file="accounting_pdf_reports.report_journal"
+    />
+
+</odoo>

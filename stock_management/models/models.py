@@ -307,7 +307,7 @@ class ConstructionTechSheet(models.Model):
 class StockPickInherit(models.Model):
     _inherit = "stock.picking"
     
-    partner_id =  fields.Many2one(comodel_name='res.partner', string='Superviseur')
+    # partner_id =  fields.Many2one(comodel_name='res.partner', string='Superviseur')
     client_id = fields.Many2one(comodel_name='construction.client', string='Client')
     superviseur_id = fields.Many2one(comodel_name='res.partner', string='Superviseur')
     program_id = fields.Many2one(comodel_name='construction.program', string='Programme', domain="[]", required=True)
