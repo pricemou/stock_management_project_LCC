@@ -269,6 +269,9 @@
             <field name="payment_method_id" position="after">
                 <field name="check_num" attrs="{'required' : [('payment_method_code', '==', 'check_printing')], 'invisible': [('payment_method_code', '!=', 'check_printing')]}"/>
             </field>
+            <field name="payment_method_id" position="attributes">
+                <attribute name="string">Mode de paiement</attribute>
+            </field>
         </field>
     </record>
 

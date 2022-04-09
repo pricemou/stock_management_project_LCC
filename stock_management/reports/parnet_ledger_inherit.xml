@@ -2,20 +2,20 @@
 <odoo>
     <template id="parnet_ledger_inherit" inherit_id="accounting_pdf_reports.report_partnerledger">
         <xpath expr="//div[@class='page']" position="replace">
-         <h2 class="text-center">Partner Ledger</h2>
+         <h2 class="text-center">Grand livre des partenaires</h2>
                         <div class="row">
                             <div class="col-3">
-                                <strong>Company:</strong>
+                                <strong>Entreprise:</strong>
                                 <p t-esc="res_company.name"/>
                             </div>
                             <div class="col-3">
-                                <t t-if="data['form']['date_from']"><strong>Date from :</strong> <span t-esc="data['form']['date_from']"/><br/></t>
-                                <t t-if="data['form']['date_to']"><strong>Date to :</strong> <span t-esc="data['form']['date_to']"/></t>
+                                <t t-if="data['form']['date_from']"><strong>Date du :</strong> <span t-esc="data['form']['date_from']"/><br/></t>
+                                <t t-if="data['form']['date_to']"><strong>Date au :</strong> <span t-esc="data['form']['date_to']"/></t>
                             </div>
                             <div class="col-3">
                                 <strong>Target Moves:</strong>
-                                <p t-if="data['form']['target_move'] == 'all'">All Entries</p>
-                                <p t-if="data['form']['target_move'] == 'posted'">All Posted Entries</p>
+                                <p t-if="data['form']['target_move'] == 'all'">Toutes les entrées</p>
+                                <p t-if="data['form']['target_move'] == 'posted'">Toutes les entrées publiées</p>
                             </div>
                         </div>
 
@@ -24,12 +24,12 @@
                                 <tr style='height:100%;background-color:#ae0001;' class="text-white">
                                     <th>Date</th>
                                     <th>JRNL</th>
-                                    <th>Account</th>
+                                    <th>Compte</th>
                                     <th>Ref</th>
                                     <th>Debit</th>
                                     <th>Credit</th>
                                     <th>Balance</th>
-                                    <th t-if="data['form']['amount_currency']">Currency</th>
+                                    <th t-if="data['form']['amount_currency']">Devise</th>
                                 </tr>
                             </thead>
                             <tbody>

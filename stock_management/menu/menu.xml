@@ -102,6 +102,19 @@
       sequence="5"
     />
 
+    <!-- Mode paiement -->
+    <record id="action_payment_method_type" model="ir.actions.act_window">
+      <field name="name">Modes de paiements</field>
+      <field name="res_model">account.payment.method</field>
+      <field name="view_mode">tree,form</field>
+      <field name="view_type">form</field>
+    </record>
+    <menuitem id="payment_method_menu"
+      parent="payment.root_payment_menu"
+      name="Mode de paiement"
+      action="action_payment_method_type"
+    />
+
 
     <!-- brouillon -->
 
